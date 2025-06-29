@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vite App</title>
+</head>
+
+<body>
+  <header>
+
+  </header>
+  <main>
+    <form id="character-form">
+      <label for="character">Pesonaje:</label>
+      <input type="text" id="character-name" name="character-name" placeholder="Ingrese el nombre" />
+      <label for="order-by-name">Ordenar Alfabeticamente</label>
+      <input type="checkbox" id="order-by-name" name="order-by-name" />
+      <button type="submit">Buscar</button>
+      <button type="reset">Reset</button>
+    </form>
+    <div class="character-container"></div>
+    <div id="pagination-buttons">
+      <button id="first-btn">Inicio</button>
+      <button id="prev-btn">Previo</button>
+      <span id="pagination-number"></span>
+      <button id="next-btn">Siguente</button>
+      <button id="last-btn">Ultimo</button>
+    </div>
+  </main>
+  <footer>
+    <p> © 2025 <a href="github.com/yourusername" target="_blank">Nicolas Gómez</a> all rights reserved.</p>
+  </footer>
+  <script type="module" src="/src/main.js"></script>
+
+</body>
+
+</html>
