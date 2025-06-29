@@ -19,10 +19,7 @@ let paginationState = {
   from: 0,
   to: 0,
 };
-// Cargamos los datos al despues de que el DOM se haya cargado
-document.addEventListener("DOMContentLoaded", () => {
-  getCatchedData(API_URL + "character");
-});
+
 form.addEventListener("submit", (e) => {
   e.preventDefault();
   const searchInput = document.querySelector("#character-name");
@@ -49,8 +46,9 @@ form.addEventListener("submit", (e) => {
 async function fetchData(url) {
   const res = await fetch(url);
   if (!res.ok) {
-    displayCharacters([]);
-    updatePagination({ page: 1, pages: 1, prev: null, next: null });
+    setPaginationState(0, 1, 1);
+    displayCharacters(0, 20);
+    updatePagination();
     console.error(`HTTP error! status: ${res.status}`);
   } else {
     const data = await res.json();
@@ -79,9 +77,11 @@ async function fetchData(url) {
         data: data,
       })
     );
+
     APIElements = data.results;
-    displayCharacters(0, 20);
-    // Actualizamos el estado de la paginación
+    setPaginationState(data.info.count, 1, PAGE_SIZE);
+    updatePagination();
+    displayCharacters(0, PAGE_SIZE);
     console.log(data);
   }
 }
@@ -96,7 +96,7 @@ function getCatchedData(url) {
       APIElements = data.results;
       setPaginationState(data.info.count, 1, PAGE_SIZE);
       updatePagination();
-      displayCharacters(0, 20);
+      displayCharacters(0, PAGE_SIZE);
       console.log(data);
       return;
     } else {
@@ -199,12 +199,12 @@ const updatePagination = () => {
     };
     lastBtn.onclick = () => {
       displayCharacters(
-        paginationState.count - PAGE_SIZE,
+        paginationState.count - (paginationState.count % PAGE_SIZE),
         paginationState.count
       );
       setPaginationState(
         paginationState.count,
-        paginationState.count - PAGE_SIZE,
+        paginationState.count - (paginationState.count % PAGE_SIZE),
         paginationState.count
       );
       updatePagination();
@@ -219,3 +219,7 @@ const updatePagination = () => {
     paginationState.to / PAGE_SIZE
   )}/${Math.ceil(paginationState.count / PAGE_SIZE)}`;
 };
+// Cargamos los datos al despues de que el DOM se haya cargado
+document.addEventListener("DOMContentLoaded", () => {
+  getCatchedData(API_URL + "character");
+});
