@@ -15,7 +15,7 @@ const PAGE_SIZE = 20; // Número de personajes por página
 let APIElements = []; // Array para almacenar los personajes
 
 // Elementos del DOM
-const form = document.getElementById("character-form");
+const form = document.getElementById("search-form");
 
 async function initializePage() {
   // Intentamos obtener los datos del caché o de la API
@@ -31,9 +31,6 @@ async function initializePage() {
     page_size: PAGE_SIZE,
   });
 }
-document.addEventListener("DOMContentLoaded", () => {
-  initializePage();
-});
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
   const searchInput = document.querySelector("#character-name");
@@ -59,4 +56,7 @@ form.addEventListener("submit", async (e) => {
     to: PAGE_SIZE,
     page_size: PAGE_SIZE,
   });
+});
+document.addEventListener("DOMContentLoaded", () => {
+  initializePage();
 });

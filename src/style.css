@@ -12,6 +12,9 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+body{
+  background-color: #242424;
+}
 .character-container{
     display: flex;
     flex-wrap: wrap;
@@ -26,7 +29,33 @@
   gap: 0.5rem;
   margin-top: 1rem;
 }
-.character-card {
+.banner{
+  background-size: cover;
+  background-position: center;
+  height: 300px;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), #97ce4c);
+}
+#search-form{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+  gap:10px;
+}
+
+#character-name{
+  padding: 0.5em;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  width: 200px;
+}
+.character-card, .episode-card, .location-card {
   background-color: #1a1a1a;
   border-radius: 8px;
   padding: 1.5em;
@@ -38,20 +67,11 @@
   height: auto;
   border-radius: 8px;
 }
-.episode-card {
-  background-color: #1a1a1a;
-  border-radius: 8px;
-  padding: 1.5em;
-  width: 250px;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 4px, rgba(0, 0, 0, 0.06) 0px 2px 6px;
-} 
-.location-card {
-  background-color: #1a1a1a;
-  border-radius: 8px;
-  padding: 1.5em;
-  width: 250px;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 4px, rgba(0, 0, 0, 0.06) 0px 2px 6px;
+.character-card:hover, .episode-card:hover, .location-card:hover {
+  transform: scale(1.05);
+  transition: transform 0.2s ease-in-out;
 }
+
 a {
   font-weight: 500;
   color: #646cff;
