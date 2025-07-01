@@ -18,8 +18,14 @@
       <input type="text" id="character-name" name="character-name" placeholder="Ingrese el nombre" />
       <label for="order-by-name">Ordenar Alfabeticamente</label>
       <input type="checkbox" id="order-by-name" name="order-by-name" />
+      <select name="type-of-content" id="type-of-content">
+        <option value="character">Personajes</option>
+        <option value="episode">Episodios</option>
+        <option value="location">Locaciones</option>
+      </select>
       <button type="submit">Buscar</button>
       <button type="reset">Reset</button>
+
     </form>
     <div class="character-container"></div>
     <div id="pagination-buttons">

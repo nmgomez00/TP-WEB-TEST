@@ -26,7 +26,32 @@
   gap: 0.5rem;
   margin-top: 1rem;
 }
-
+.character-card {
+  background-color: #1a1a1a;
+  border-radius: 8px;
+  padding: 1.5em;
+  width: 250px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 4px, rgba(0, 0, 0, 0.06) 0px 2px 6px;
+}
+.character-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+.episode-card {
+  background-color: #1a1a1a;
+  border-radius: 8px;
+  padding: 1.5em;
+  width: 250px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 4px, rgba(0, 0, 0, 0.06) 0px 2px 6px;
+} 
+.location-card {
+  background-color: #1a1a1a;
+  border-radius: 8px;
+  padding: 1.5em;
+  width: 250px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 4px, rgba(0, 0, 0, 0.06) 0px 2px 6px;
+}
 a {
   font-weight: 500;
   color: #646cff;
