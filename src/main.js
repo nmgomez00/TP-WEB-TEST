@@ -7,6 +7,7 @@ import "./styles/header.css";
 import { displayListOfCards } from "./utils/displayListOfCards";
 import { updatePagination } from "./utils/paginationLogic";
 import { getData } from "./utils/getData";
+import { storeData } from "./utils/storeData";
 
 const PAGE_SIZE = 20; // Número de personajes por página
 let APIElements = []; // Array para almacenar los personajes
@@ -16,18 +17,22 @@ const form = document.getElementById("search-form");
 const typeOfContentSelect = document.querySelector("#type-of-content");
 
 async function initializePage() {
-  // Intentamos obtener los datos del caché o de la API
   const TYPE_OF_CONTENT = "character"; // Tipo de contenido por defecto
-  APIElements = await getData(TYPE_OF_CONTENT);
+  // Seteamos los datos necesarios en el LocalStorage
+  const isLocationStored = await storeData("location");
+  const isEpisodeStored = await storeData("episode");
+  if (isEpisodeStored && isLocationStored) {
+    APIElements = await getData(TYPE_OF_CONTENT);
 
-  // Inicializamos la paginación y mostramos los primeros personajes
-  displayListOfCards(APIElements, TYPE_OF_CONTENT, 0, PAGE_SIZE);
-  updatePagination(APIElements, TYPE_OF_CONTENT, {
-    count: APIElements.length,
-    from: 0,
-    to: PAGE_SIZE,
-    page_size: PAGE_SIZE,
-  });
+    // Inicializamos la paginación y mostramos los primeros personajes
+    displayListOfCards(APIElements, TYPE_OF_CONTENT, 0, PAGE_SIZE);
+    updatePagination(APIElements, TYPE_OF_CONTENT, {
+      count: APIElements.length,
+      from: 0,
+      to: PAGE_SIZE,
+      page_size: PAGE_SIZE,
+    });
+  }
 }
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -113,6 +118,5 @@ typeOfContentSelect.addEventListener("change", () => {
   }
 });
 document.addEventListener("DOMContentLoaded", () => {
-  localStorage.removeItem("rick-and-morty-data-personajes");
   initializePage();
 });
