@@ -1,8 +1,8 @@
-export function displayContent(arr, type_of_content, from, to) {
+export function displayListOfCards(arr, type_of_content, from, to) {
   console.log(
     `Mostrando elementos del ${from} al ${to} de un total de ${arr.length}`
   );
-  const containerEl = document.querySelector(".character-container");
+  const containerEl = document.querySelector(".cards-container");
 
   containerEl.innerHTML = "";
   if (arr.length === 0) {
@@ -24,9 +24,7 @@ export function displayContent(arr, type_of_content, from, to) {
         card.innerHTML = `
       <img src=${arr[i].image} alt="imagen de ${arr[i].name}">
       <h3>${arr[i].name}</h3> 
-      <p>Especie: ${arr[i].species}</p>
-      <p>Género: ${arr[i].gender}</p>
-      <p>Estado: ${arr[i].status}</p>`;
+      <a href="details.html?id=${arr[i].id}&type=${type_of_content}" class="details-button">Ver detalles</a>`;
         containerEl.appendChild(card);
         break;
       case "episode":
@@ -35,7 +33,8 @@ export function displayContent(arr, type_of_content, from, to) {
         episodeCard.innerHTML = `
           <h3>${arr[i].name}</h3>
           <p>Episodio: ${arr[i].episode}</p>
-          <p>Fecha de emisión: ${arr[i].air_date}</p>`;
+          <p>Fecha de emisión: ${arr[i].air_date}</p>
+          <a href="details.html?id=${arr[i].id}&type=${type_of_content}" class="details-button">Personajes del episodio</a>`;
         containerEl.appendChild(episodeCard);
         break;
       case "location":
@@ -44,21 +43,12 @@ export function displayContent(arr, type_of_content, from, to) {
         locationCard.innerHTML = `
           <h3>${arr[i].name}</h3>
           <p>Tipo: ${arr[i].type}</p>
-          <p>Dimensión: ${arr[i].dimension}</p>`;
+          <p>Dimensión: ${arr[i].dimension}</p>
+          <a href="details.html?id=${arr[i].id}&type=${type_of_content}" class="details-button">Ver residentes</a>`;
         containerEl.appendChild(locationCard);
         break;
       default:
         console.error("Tipo de contenido no reconocido");
     }
   }
-  /*
-  characters.forEach(({ image, name }) => {
-    const card = document.createElement("div");
-    card.className = "character-card";
-    card.innerHTML = `
-      <img src=${image} alt="imagen de ${name}">
-      <h3>${name}</h3> `;
-    containerEl.appendChild(card);
-  });
-  */
 }

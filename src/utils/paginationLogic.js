@@ -1,4 +1,4 @@
-import { displayContent } from "./displayContent.js";
+import { displayListOfCards } from "./displayListOfCards";
 const firstBtn = document.getElementById("first-btn");
 const prevBtn = document.getElementById("prev-btn");
 const nextBtn = document.getElementById("next-btn");
@@ -9,7 +9,7 @@ export let paginationState = {
   count: 0,
   from: 0,
   to: 0,
-  page_size: 20, // Default page size
+  page_size: 20,
 };
 
 function setPaginationState(newState) {
@@ -39,7 +39,12 @@ export function updatePagination(
     // seteamos la url del primer botón
 
     firstBtn.onclick = () => {
-      displayContent(elements, type_of_content, 0, paginationState.page_size);
+      displayListOfCards(
+        elements,
+        type_of_content,
+        0,
+        paginationState.page_size
+      );
       updatePagination(elements, type_of_content, {
         count: paginationState.count,
         from: 0,
@@ -48,7 +53,7 @@ export function updatePagination(
       });
     };
     prevBtn.onclick = () => {
-      displayContent(
+      displayListOfCards(
         elements,
         type_of_content,
         paginationState.from - paginationState.page_size,
@@ -71,7 +76,7 @@ export function updatePagination(
 
   if (paginationState.to < paginationState.count) {
     nextBtn.onclick = () => {
-      displayContent(
+      displayListOfCards(
         elements,
         type_of_content,
         paginationState.to,
@@ -86,7 +91,7 @@ export function updatePagination(
       });
     };
     lastBtn.onclick = () => {
-      displayContent(
+      displayListOfCards(
         elements,
         type_of_content,
         paginationState.count -

@@ -1,29 +1,39 @@
 export async function fetchData(url) {
-  const res = await fetch(url);
-  if (!res.ok) {
-    console.error(`HTTP error! status: ${res.status}`);
-    return null;
-  } else {
-    const data = await res.json();
-    let resNext = null;
-    let nextData = null;
-    // Guardamos todos los datos en un array para poder ordenarlos
-    while (data.info.next !== null) {
-      console.log("data.info.next: ", data.info.next);
-      resNext = await fetch(data.info.next);
-      if (!resNext.ok) {
-        console.error(`HTTP error! status: ${resNext.status}`);
-        break;
-      }
-      nextData = await resNext.json();
-      // concatenamos los resultados de la siguiente página
-      data.results = data.results.concat(nextData.results);
-      // actualizamos la url para la siguiente iteración
-      data.info.next = nextData.info.next;
-      data.info.prev = nextData.info.prev;
-    }
-    // Guardamos los datos en el localStorage para no sobrecargar la API
+  try {
+    const res = await fetch(url);
 
-    return data;
+    if (!res.ok) {
+      console.error(`HTTP error! status: ${res.status}`);
+      return null;
+    } else {
+      const data = await res.json();
+      const pages = data.info.pages;
+      console.log("getting data from url: ", url, "pages: ", pages);
+      // Si hay más de una página, hacemos peticiones a las siguientes páginas
+      if (pages > 1) {
+        let promesas = [];
+        for (let i = 2; i <= pages; i++) {
+          promesas.push(
+            fetch(`${url}/?page=${i}`).then((res) => {
+              if (!res.ok) {
+                console.error(`HTTP error! status: ${res.status}`);
+                return null;
+              }
+              return res.json();
+            })
+          );
+        }
+        const restoDeResultados = await Promise.all(promesas);
+        console.log("restoDeResultados: ", restoDeResultados);
+        data.results = data.results.concat(
+          restoDeResultados.flatMap((item) => item.results)
+        );
+      }
+      console.log("data: ", data);
+      return data;
+    }
+  } catch (error) {
+    console.error("No se pudo traer los datos", error);
+    return null;
   }
 }

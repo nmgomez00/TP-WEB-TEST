@@ -5,39 +5,58 @@
   <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="/vite.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- <link rel="stylesheet" href="./src/styles/globlals.css">
+  <link rel="stylesheet" href="./src/style.css">
+  <link rel="stylesheet" href="./src/styles/header.css">
+  <link rel="stylesheet" href="./src/styles/footer.css"> -->
   <title>Rick and Morty</title>
 </head>
 
 <body>
   <header>
-
-    <nav>
-
-    </nav>
+    <div class="logo">
+      <a href="#">
+        <img src="./public/rick_and_morty_logo.gif" alt="Rick and Morty Wiki" class="site-logo">
+      </a>
+    </div>
   </header>
   <main>
     <section class="banner">
       <div>
-        <p>
-          Rick and Morty
-        </p>
+        <h1>El Multiverso de Rick y Morty</h1>
+        <h2>Toda la información que necesitas sobre tus aventuras favoritas.</h2>
       </div>
     </section>
     <form id="search-form">
       <label for="character">Buscar:</label>
       <input type="text" id="character-name" name="character-name" placeholder="Ingrese el nombre..." />
-      <label for="order-by-name">Ordenar Alfabeticamente</label>
+      <label for="order-by-name">Ordenar por nombre:</label>
       <input type="checkbox" id="order-by-name" name="order-by-name" />
+      <label for="type-of-content">Tipo:</label>
       <select name="type-of-content" id="type-of-content">
         <option value="character">Personajes</option>
         <option value="episode">Episodios</option>
         <option value="location">Locaciones</option>
       </select>
+      <label for="gender" id="gender-label">Genero:</label>
+      <select name="gender" id="gender">
+        <option value="All">Todos</option>
+        <option value="Male">Hombre</option>
+        <option value="Female">Mujer</option>
+        <option value="Other">Otros</option>
+      </select>
+      <label for="status" id="status-label">Estado:</label>
+      <select name="status" id="status">
+        <option value="All">Todos</option>
+        <option value="Alive">Vivo</option>
+        <option value="Dead">Muerto</option>
+        <option value="Unknown">Desconocido</option>
+      </select>
       <button type="submit">Buscar</button>
       <button type="reset">Reset</button>
 
     </form>
-    <div class="character-container"></div>
+    <div class="cards-container"></div>
     <div id="pagination-buttons">
       <button id="first-btn">Inicio</button>
       <button id="prev-btn">Previo</button>

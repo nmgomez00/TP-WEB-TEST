@@ -1,21 +1,19 @@
-import "./style.css";
-import { fetchData } from "./utils/fetchData";
-import { fetchCatchedData } from "./utils/fetchCatchedData";
-import { displayContent } from "./utils/displayContent";
+import "./styles/globals.css";
+import "./styles/general-styles.css";
+import "./styles/index.css";
+import "./styles/footer.css";
+import "./styles/header.css";
+
+import { displayListOfCards } from "./utils/displayListOfCards";
 import { updatePagination } from "./utils/paginationLogic";
 import { getData } from "./utils/getData";
-
-//para ordenar hay que fetchear todos los personajes y luego
-/*
-const API_CACHE_KEY_PERSONAJES = "rick-and-morty-data-personajes";
-const API_CACHE_KEY_EPISODIOS = "rick-and-morty-data-episodios";
-const API_CACHE_KEY_LOCACIONES = "rick-and-morty-data-locaciones";*/
 
 const PAGE_SIZE = 20; // Número de personajes por página
 let APIElements = []; // Array para almacenar los personajes
 
 // Elementos del DOM
 const form = document.getElementById("search-form");
+const typeOfContentSelect = document.querySelector("#type-of-content");
 
 async function initializePage() {
   // Intentamos obtener los datos del caché o de la API
@@ -23,7 +21,7 @@ async function initializePage() {
   APIElements = await getData(TYPE_OF_CONTENT);
 
   // Inicializamos la paginación y mostramos los primeros personajes
-  displayContent(APIElements, TYPE_OF_CONTENT, 0, PAGE_SIZE);
+  displayListOfCards(APIElements, TYPE_OF_CONTENT, 0, PAGE_SIZE);
   updatePagination(APIElements, TYPE_OF_CONTENT, {
     count: APIElements.length,
     from: 0,
@@ -35,7 +33,9 @@ form.addEventListener("submit", async (e) => {
   e.preventDefault();
   const searchInput = document.querySelector("#character-name");
   const orderByNameCheckbox = document.querySelector("#order-by-name");
-  const typeOfContentSelect = document.querySelector("#type-of-content");
+  const genderSelect = document.querySelector("#gender");
+  const statusSelect = document.querySelector("#status");
+
   const TYPE_OF_CONTENT = typeOfContentSelect.value;
 
   const query = searchInput.value.trim().toLowerCase();
@@ -49,7 +49,40 @@ form.addEventListener("submit", async (e) => {
   if (orderByNameCheckbox.checked) {
     APIElements.sort((a, b) => a.name.localeCompare(b.name));
   }
-  displayContent(APIElements, TYPE_OF_CONTENT, 0, PAGE_SIZE);
+  if (TYPE_OF_CONTENT == "character") {
+    const gender = genderSelect.value;
+    const status = statusSelect.value;
+
+    switch (gender) {
+      case "All":
+        break;
+      case "Male":
+      case "Female":
+        APIElements = APIElements.filter((e) => e.gender == gender);
+        break;
+      case "Other":
+        APIElements = APIElements.filter((e) => {
+          return e.gender !== "Male" && e.gender !== "Female";
+        });
+        break;
+      default:
+        break;
+    }
+    switch (status) {
+      case "Dead":
+      case "Alive":
+        APIElements = APIElements.filter((e) => e.status === status);
+        break;
+      case "Unknown":
+        APIElements = APIElements.filter(
+          (e) => e.status !== "Alive" && e.status !== "Dead"
+        );
+        break;
+      default:
+        break;
+    }
+  }
+  displayListOfCards(APIElements, TYPE_OF_CONTENT, 0, PAGE_SIZE);
   updatePagination(APIElements, TYPE_OF_CONTENT, {
     count: APIElements.length,
     from: 0,
@@ -57,6 +90,29 @@ form.addEventListener("submit", async (e) => {
     page_size: PAGE_SIZE,
   });
 });
+
+typeOfContentSelect.addEventListener("change", () => {
+  const genderSelect = document.querySelector("#gender");
+  const statusSelect = document.querySelector("#status");
+  const statusLabel = document.getElementById("status-label");
+  const genderLabel = document.getElementById("gender-label");
+
+  const TYPE_OF_CONTENT = typeOfContentSelect.value;
+  if (TYPE_OF_CONTENT == "character") {
+    genderSelect.classList.remove("hidden");
+    statusSelect.classList.remove("hidden");
+
+    statusLabel.classList.remove("hidden");
+    genderLabel.classList.remove("hidden");
+  } else {
+    genderSelect.classList.add("hidden");
+    statusSelect.classList.add("hidden");
+
+    statusLabel.classList.add("hidden");
+    genderLabel.classList.add("hidden");
+  }
+});
 document.addEventListener("DOMContentLoaded", () => {
+  localStorage.removeItem("rick-and-morty-data-personajes");
   initializePage();
 });
