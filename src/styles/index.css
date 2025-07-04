@@ -1,6 +1,7 @@
 
-body{
- background-image: url("/public/rick_and_morty_banner-details.png");
+.banner{
+  background-image:linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/rick_and_morty_banner.jpg");
+    
 }
 .cards-container{
     display: flex;
@@ -24,18 +25,7 @@ body{
 
 }
 
-.banner{
-  background-image: url("/rick_and_morty_banner.jpg");
-    background-size: cover;
-    background-position: center;
-  height: 300px;
-  width: 100vw;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-}
+
 #search-form{
   width: 90vw;
   display: flex;

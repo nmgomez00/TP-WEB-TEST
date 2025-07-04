@@ -1,21 +1,9 @@
-body{
-    background-image: url("/rick_and_morty_banner-details.png");
-}
 
 .banner{
-  background-image: url("/rick_and_morty_banner-details.jpg");
-  background-position:50%;
-
-  height: 300px;
-  width: 100vw;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url("/rick_and_morty_banner_details.jpg");
 }
-form{
-    color:white;
+.details-container{
+  width: 100%;
 }
 div>img{
     width:180px;
@@ -41,8 +29,6 @@ div>img{
     justify-content: space-between;
     align-items: space-between;
     gap:50px;
-    padding:10px;
-    margin:10px;
 }
 .episode-own-details h2, .location-own-details h2{
     text-align: center;
@@ -51,8 +37,6 @@ div>img{
     border-radius: 10px;
     padding:10px;
 }
-
-
 
 .location-details, .episode-details, .character-details{
     display:flex;
