@@ -1,5 +1,11 @@
 import { fetchData } from "./fetchData";
 import { API_INFO } from "../api/constantes";
+
+/**
+ * guarda los datos en el local storage si no se encuentra ahi anteriormente
+ * @param {string} type  tipo de dato
+ * @returns devueve true si los datos estan o se guardaron o false en caso contrario
+ */
 export async function storeData(type) {
   let APIElements = [];
   const API_ENDPOINT = (() => {
@@ -27,10 +33,10 @@ export async function storeData(type) {
         API_INFO.API_URL + API_ENDPOINT,
         JSON.stringify({ timestamp: Date.now(), data })
       );
-      console.log("Datos guardados en el caché");
+      //console.log("Datos guardados en el caché");
       return true;
     } else {
-      console.error("Error al obtener los datos de la API");
+      //console.error("Error al obtener los datos de la API");
       return false;
     }
   }

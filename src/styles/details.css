@@ -33,7 +33,7 @@ div>img{
     align-items: space-between;
     gap:50px;
 }
-.episode-own-details h2, .location-own-details h2{
+.episode-own-details h2, .location-own-details h2, .character-details > h2{
     text-align: center;
     background-color: var(--primary-color);
     border: 2px solid var(--hover-color);
@@ -59,20 +59,26 @@ ul{
     padding:15px;
 }
 li{
-    list-style: none;
+list-style: none;
 }
-.details-button{
-    margin-top: 5px;
-    margin-bottom: 5px;
-    background-color: var(--primary-color);
+li a{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
 }
+
 .details-button:hover{
     transform: scale(1.05);
 }
-.details-button>a{
+a.details-button{
+    color:white;
     border:2px solid var(--secondary-color);
     border-radius: 10px;
     padding: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    background-color: var(--primary-color);
 }
 
 @media  (max-width: 480px){
@@ -84,7 +90,6 @@ li{
  .character-details h2, .episode-details h2, .location-details h2{
     font-size: 1rem;
   }
- 
  
 }
 @media (min-width: 480px) and (max-width:768px){

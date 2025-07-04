@@ -1,3 +1,8 @@
+/**
+ * Dada un string devuelve los todos datos de cierto tipo o null
+ * @param {string} url endpoint de todos los elementos de un tipo (/episodio, /character o /location)
+ * @returns  null o los datos dependiendo si fue o no exitosa la peticion
+ */
 export async function fetchData(url) {
   try {
     const res = await fetch(url);

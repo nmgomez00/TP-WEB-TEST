@@ -1,7 +1,15 @@
+/**
+ * Crea una tarjeta con los detalles de un locacion
+ * @param {object} arr lista de objetos JSON con informacion de un tipo
+ * de elemento (personaje, episodio o locacion)
+ * @param {string} type_of_content string con el tipo de contenido
+ * ("character", "episode", "location")
+ * @param {number} from representa el primer elemento del rango
+ * de lo que se va a mostrar
+ * @param {number} to  hasta que elemento se mostrará.
+ * @returns{HTMLDivElement} retorna un  elemeto div con la lista de elementos.
+ */
 export function displayListOfCards(arr, type_of_content, from, to) {
-  console.log(
-    `Mostrando elementos del ${from} al ${to} de un total de ${arr.length}`
-  );
   const containerEl = document.querySelector(".cards-container");
 
   containerEl.innerHTML = "";
@@ -14,11 +22,10 @@ export function displayListOfCards(arr, type_of_content, from, to) {
   if (from < 0) {
     from = 0;
   }
-  // mostramos los personajes en el contenedor
-
-  for (let i = from; i < to; i++) {
-    switch (type_of_content) {
-      case "character":
+  // mostramos los personajes en el contenedor creando sus tarjetas de acuerdo al tipo
+  switch (type_of_content) {
+    case "character":
+      for (let i = from; i < to; i++) {
         const card = document.createElement("div");
         card.className = "character-card";
         card.innerHTML = `
@@ -26,8 +33,10 @@ export function displayListOfCards(arr, type_of_content, from, to) {
       <h3>${arr[i].name}</h3> 
       <a href="details.html?id=${arr[i].id}&type=${type_of_content}" class="details-button">Ver detalles</a>`;
         containerEl.appendChild(card);
-        break;
-      case "episode":
+      }
+      break;
+    case "episode":
+      for (let i = from; i < to; i++) {
         const episodeCard = document.createElement("div");
         episodeCard.className = "episode-card";
         episodeCard.innerHTML = `
@@ -36,8 +45,10 @@ export function displayListOfCards(arr, type_of_content, from, to) {
           <p>Fecha de emisión: ${arr[i].air_date}</p>
           <a href="details.html?id=${arr[i].id}&type=${type_of_content}" class="details-button">Personajes del episodio</a>`;
         containerEl.appendChild(episodeCard);
-        break;
-      case "location":
+      }
+      break;
+    case "location":
+      for (let i = from; i < to; i++) {
         const locationCard = document.createElement("div");
         locationCard.className = "location-card";
         locationCard.innerHTML = `
@@ -46,9 +57,9 @@ export function displayListOfCards(arr, type_of_content, from, to) {
           <p>Dimensión: ${arr[i].dimension}</p>
           <a href="details.html?id=${arr[i].id}&type=${type_of_content}" class="details-button">Ver residentes</a>`;
         containerEl.appendChild(locationCard);
-        break;
-      default:
-        console.error("Tipo de contenido no reconocido");
-    }
+      }
+      break;
+    default:
+      console.error("Tipo de contenido no reconocido");
   }
 }

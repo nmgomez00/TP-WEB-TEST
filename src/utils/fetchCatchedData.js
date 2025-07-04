@@ -1,3 +1,8 @@
+/**
+ * Dada una key extrae los datos del localstorage
+ * @param {string} key
+ * @returns
+ */
 export function fetchCatchedData(key) {
   if (localStorage.getItem(key)) {
     const APICached = JSON.parse(localStorage.getItem(key));
@@ -5,17 +10,17 @@ export function fetchCatchedData(key) {
     const data = APICached.data;
     // Si el caché es menor a 1 hora, usamos los datos del caché
     if (cacheAge < 3600000) {
-      console.log("Usando datos del caché");
+      //console.log("Usando datos del caché");
 
       return data;
     } else {
-      console.log("Caché expirado, obteniendo nuevos datos");
+      //console.log("Caché expirado, obteniendo nuevos datos");
       localStorage.removeItem(key);
-      console.log(`Obteniendo datos...`);
+      //console.log(`Obteniendo datos...`);
       return null;
     }
   } else {
-    console.log(`Obteniendos datos...`);
+    //console.log(`Obteniendos datos...`);
     return null;
   }
 }

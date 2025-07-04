@@ -1,6 +1,11 @@
 import { extractEndpointAndId } from "../utils/extractEndpointAndId";
 import { fetchCatchedElements } from "../utils/fetchCartchedElement";
-
+/**
+ * Crea una tarjeta con los detalles de un locacion
+ * @param {object} episode es un objeto con la informacion especifca del locacion, y un
+ * array con la endpoint a los personajes que residen en dicha locacion.
+ * @returns{HTMLDivElement} retorna un  elemeto div con la informacion la locacion y residentes.
+ */
 export function locationDetailsCard(location) {
   let characters = [];
   if (location.residents.length !== 0) {
@@ -8,8 +13,7 @@ export function locationDetailsCard(location) {
       location.residents.map((e) => extractEndpointAndId(e))
     ).map((e) => {
       const itemEl = document.createElement("li");
-      itemEl.classList.add("details-button");
-      itemEl.innerHTML = `<a href="details.html?id=${e.id}&type=character" >${e.name}</a>`;
+      itemEl.innerHTML = `<a href="details.html?id=${e.id}&type=character" class="details-button"" >${e.name}</a>`;
       return itemEl;
     });
   } else {

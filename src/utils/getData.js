@@ -1,7 +1,12 @@
 import { fetchData } from "./fetchData";
 import { fetchCatchedData } from "./fetchCatchedData";
 import { API_INFO } from "../api/constantes";
-
+/**
+ * Dado un tipo de elemento devuelve una lista de todos ellos buscandolos
+ *  en el cache o haciendo peticiones
+ * @param {string} type tipo de elemento
+ * @returns  lista de JSON
+ */
 export async function getData(type) {
   let APIElements = [];
   const API_ENDPOINT = (() => {

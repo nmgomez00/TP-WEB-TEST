@@ -1,4 +1,10 @@
 import { API_INFO } from "../api/constantes";
+/**
+ * Dado un tipo y id, devuelve un elemento del cache
+ * @param {string} type tipo de elemento
+ * @param {number} id  id del elemento
+ * @returns  elemento JSON del cache o null si no está
+ */
 export function fetchCatchedElement(type, id) {
   if (!id || !type) {
     console.log("Datos invalidos");
@@ -29,6 +35,11 @@ export function fetchCatchedElement(type, id) {
   }
   return null;
 }
+/**
+ * Dado una lista de tipos y IDs, devuelve una lista de elementos del cache
+ * @param {object} arr lista de tipo de elemento y id
+ * @returns  devuelve una lista de elementos JSON del cache o null si no están
+ */
 export function fetchCatchedElements(arr) {
   let results = [];
   for (let i = 0; i < arr.length; i++) {

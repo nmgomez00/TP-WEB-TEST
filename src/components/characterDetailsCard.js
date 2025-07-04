@@ -2,15 +2,16 @@ import { extractEndpointAndId } from "../utils/extractEndpointAndId";
 import { fetchCatchedElements } from "../utils/fetchCartchedElement";
 /**
  * Crea una tarjeta con los detalles del personaje
- * @param {object} character
- * @returns{HTMLDivElement} retorna un  elemeto div con la informacion del personaje
+ * @param {object} character es un objeto con la informacion personal del personje, origen,
+ * locacion actual y un array de los episodios en donde aparecen.
+ * @returns{HTMLDivElement} retorna un elemeto div con la informacion del personaje y los episodios
+ * en donde este aparecio.
  */
 export function characterDetailsCard(character) {
   const episodes = fetchCatchedElements(
     character.episode.map((e) => extractEndpointAndId(e))
   ).map((e) => {
     const itemEl = document.createElement("li");
-    itemEl.classList.add("details-button");
     itemEl.innerHTML = `<a href="details.html?id=${e.id}&type=episode" class="details-button">${e.name}</a>`;
     return itemEl;
   });

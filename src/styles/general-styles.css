@@ -55,22 +55,20 @@ ul, .banner > div {
 } */
 .banner h1,
 .banner h2 {
-    z-index: 2;
-    position: relative; 
     margin-left:10px;
     margin-right:10px;
 }
 @media  (max-width: 480px){
   .banner {
-    height: 150px;
-    font-size:0.5rem;
+    height: 190px;
+    font-size:0.65rem;
     padding: 15px;
   }
  
 }
 @media (min-width: 480px){
   .banner {
-    height: 200px;
+    height: 220px;
     font-size:0.75rem;
     padding: 20px;
   }

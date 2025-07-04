@@ -16,15 +16,15 @@
   align-items: center;
   gap: 10px;
   margin-top: 15px;
+  font-size: 1em;
 }
 #pagination-number{
   background-color: var(--primary-color);
   padding: 5px;
   font-size: 1em;
-  border-radius: 5px;
-
+  border-radius: 10px;
+  padding:10px;
 }
-
 
 #search-form{
   width: 90vw;
@@ -34,6 +34,9 @@
   flex-wrap: wrap;
   margin-bottom: 1rem;
   gap:10px;
+}
+form select{
+  width: 150px;
 }
 
 #character-name{
@@ -89,6 +92,15 @@ button:focus-visible {
   .character-card, .episode-card, .location-card {
     width:150px;
   }
+  .form-group{
+    max-width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap:10px;
+  }
+
   .cards-container, #search-form{
     flex-direction: column;
     align-items: center;
@@ -99,7 +111,6 @@ button:focus-visible {
   }
   #pagination-buttons> button{
    padding: 0.6em 1.2em;
-   font-size: 0.7em;
    
   }
  

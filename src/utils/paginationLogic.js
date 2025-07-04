@@ -12,14 +12,12 @@ export let paginationState = {
   page_size: 20,
 };
 
-function setPaginationState(newState) {
-  if (newState && typeof newState === "object") {
-    paginationState = {
-      ...newState,
-    };
-  }
-}
-
+/**
+ * Actualiza el estado y los eventos de los botones de la paginacion
+ * @param {object} elements lista de elementos de un tipo especifico
+ * @param {*} type_of_content  tipo de los elementos
+ * @param {*} newPaginationState  nuevo estado de la paginacion
+ */
 export function updatePagination(
   elements,
   type_of_content,
@@ -36,8 +34,6 @@ export function updatePagination(
   }
 
   if (paginationState.from > 0) {
-    // seteamos la url del primer botón
-
     firstBtn.onclick = () => {
       displayListOfCards(
         elements,

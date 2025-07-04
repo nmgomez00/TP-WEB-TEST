@@ -15,7 +15,9 @@ let APIElements = []; // Array para almacenar los personajes
 // Elementos del DOM
 const form = document.getElementById("search-form");
 const typeOfContentSelect = document.querySelector("#type-of-content");
-
+/**
+ * Inicializa la pagina cargando todos los datos de la API en localStorage
+ */
 async function initializePage() {
   const TYPE_OF_CONTENT = "character"; // Tipo de contenido por defecto
   // Seteamos los datos necesarios en el LocalStorage
@@ -34,6 +36,7 @@ async function initializePage() {
     });
   }
 }
+//event listener para el formulario
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
   const searchInput = document.querySelector("#character-name");
@@ -95,7 +98,7 @@ form.addEventListener("submit", async (e) => {
     page_size: PAGE_SIZE,
   });
 });
-
+//si cambia el tipo a episodio o locacion algunos filtros de ocultan
 typeOfContentSelect.addEventListener("change", () => {
   const genderSelect = document.querySelector("#gender");
   const statusSelect = document.querySelector("#status");
