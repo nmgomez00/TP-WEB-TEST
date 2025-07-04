@@ -17,17 +17,21 @@ export async function storeData(type) {
         return API_INFO.API_CHARACTER_ENDPOINT;
     }
   })();
-  const data = await fetchData(API_INFO.API_URL + API_ENDPOINT);
-  if (data) {
-    APIElements = data.results;
-    localStorage.setItem(
-      API_INFO.API_URL + API_ENDPOINT,
-      JSON.stringify({ timestamp: Date.now(), data })
-    );
-    console.log("Datos guardados en el caché");
+  if (localStorage.getItem(API_INFO.API_URL + API_ENDPOINT)) {
     return true;
   } else {
-    console.error("Error al obtener los datos de la API");
-    return false;
+    const data = await fetchData(API_INFO.API_URL + API_ENDPOINT);
+    if (data) {
+      APIElements = data.results;
+      localStorage.setItem(
+        API_INFO.API_URL + API_ENDPOINT,
+        JSON.stringify({ timestamp: Date.now(), data })
+      );
+      console.log("Datos guardados en el caché");
+      return true;
+    } else {
+      console.error("Error al obtener los datos de la API");
+      return false;
+    }
   }
 }
